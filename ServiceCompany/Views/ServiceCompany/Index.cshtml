@@ -1,4 +1,5 @@
 ﻿@using ServiceCompany.DbStuff.Models.Enums
+@using ServiceCompany.Localisations
 @model IndexViewModel
 
 @{
@@ -18,14 +19,14 @@
 }
 
 <div class="content-container">
-    <h2 class="h2">Добро пожаловать на стартовую страницу!</h2>
-    <p class="p">Здесь вы можете разместить важную информацию или предложения для пользователей.</p>
+    <h2 class="h2">@ServiceCompany.WelcomeStartPage @ServiceCompany.StartPage!</h2>
+    <p class="p">@ServiceCompany.StartPageDescribe.</p>
     
     <div class="userstat">
         <ul>
-            <li><a href="/ServiceCompany/Index">Всего участников</a></li>
-            <li><a href="/ServiceCompany/IndexUsers">Пользователей</a></li>
-            <li><a href="/ServiceCompany/IndexAdmins">Админов</a></li>
+            <li><a href="/ServiceCompany/Index">@ServiceCompany.AllMembers</a></li>
+            <li><a href="/ServiceCompany/IndexUsers">@ServiceCompany.Users</a></li>
+            <li><a href="/ServiceCompany/IndexAdmins">@ServiceCompany.Managers</a></li>
         </ul>
     </div>
     <div>
@@ -34,13 +35,13 @@
             {
                 <li>
                     <div>
-                        <span>@user.NickName | @user.MemberRole.</span>
+                        <span>@user.NickName | @user.MemberRole</span>
                     </div>
                 </li>
             }
         </ul>
         <div>
-            Количество участников @Model.Users.Count
+            @ServiceCompany.NumberOf @ServiceCompany.AllMembers @Model.Users.Count
         </div>
     </div>
 </div>

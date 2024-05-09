@@ -9,12 +9,14 @@ namespace ServiceCompany.DbStuff.Repositories
     {
         public ArticleRepository(ServiceCompanyDbContext context) : base(context) { }
 
-        public override Article GetById(int id)
+        public Article GetWithAuthorById(int id)
         {
-            return _entities.Include(x => x.Author).SingleOrDefault(ent => ent.Id == id);
+            return _entities
+                .Include(x => x.Author)
+                .SingleOrDefault(ent => ent.Id == id);
         }
 
-        public override IEnumerable<Article> GetAll()
+        public IEnumerable<Article> GetAllWithAuthor()
         {
             return _entities
                 .Include(x => x.Author)
@@ -22,19 +24,15 @@ namespace ServiceCompany.DbStuff.Repositories
                 .ToList();
         }
 
-        //public void UpdateArticle(ArticleViewModel model, int id)
-        //{
-        //    var user = _context.Users.SingleOrDefault(x => x.Id == id);
+        public void UpdateArticle(ArticleViewModel model, int id)
+        {
+            var article = _context.Articles.SingleOrDefault(x => x.Id == id);
 
-        //    user.FirstName = model.FirstName;
-        //    user.LastName = model.LastName;
-        //    user.NickName = model.NickName;
-        //    user.Email = model.Email;
-        //    user.PhoneNumber = model.PhoneNumber;
-        //    user.Password = model.Password;
+            article.Title = model.Title;
+            article.Description = model.Description;
 
-        //    _context.SaveChanges();
-        //}
+            _context.SaveChanges();
+        }
 
         public IEnumerable<Article> GetArticles()
         {

@@ -7,6 +7,7 @@ using ServiceCompany.DbStuff.Repositories.MongoRepositories;
 using ServiceCompany.Hubs;
 using ServiceCompany.Services;
 using Microsoft.EntityFrameworkCore;
+using ServiceCompany.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,6 @@ builder.Services.AddCors(option =>
 {
     option.AddDefaultPolicy(policy =>
     {
-        //policy.WithHeaders("Smile", "Credential");
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
         policy.SetIsOriginAllowed(url => true);
@@ -77,6 +77,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseMiddleware<LocalisationMiddleware>();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -86,8 +88,6 @@ app.UseAuthentication(); // Who I am?
 app.UseAuthorization(); // May I?
 
 app.MapHub<AlertHub>("/signalr-hubs/alert");
-
-//app.MapGet("/", () => "Hello World!");
 
 app.MapControllerRoute(
     name: "default",

@@ -1,4 +1,5 @@
 ﻿@using ServiceCompany.DbStuff.Models.Enums
+@using ServiceCompany.Localisations
 @model ProfileViewModel
 
 @{
@@ -15,51 +16,53 @@
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/index.js"></script>
+    <script src="~/js/language.js"></script>
 }
 
 <main>
     <div>
-        <h2>Личный кабинет</h2>
+        <h2>@ServiceCompany.Profile</h2>
         <form method="post">
-            <img class="avatar" src="img.svg" width="80" height="80" alt="Аватар">
+            <img class="avatar" src="img.svg" width="80" height="80" alt="@ServiceCompany.Icon">
             <input type="hidden" name="id" value="@Model.Id" />
-            <label for="name"> Имя</label>
+            <label for="name"> @ServiceCompany.UserFirstName</label>
             @Html.TextBoxFor(x => x.FirstName)
             @Html.ValidationMessageFor(x => x.FirstName)
-            <label for="name"> Фамилия</label>
+            <label for="name"> @ServiceCompany.UserLastName</label>
             @Html.TextBoxFor(x => x.LastName)
             @Html.ValidationMessageFor(x => x.LastName)
-            <label for="name"> Телефон</label>
+            <label for="name"> @ServiceCompany.PhoneNumber</label>
             @Html.TextBoxFor(x => x.PhoneNumber)
             @Html.ValidationMessageFor(x => x.PhoneNumber)
-            <label for="name"> Ваш ник</label>
+            <label for="name"> @ServiceCompany.NickName</label>
             @Html.TextBoxFor(x => x.NickName)
             @Html.ValidationMessageFor(x => x.NickName)
-            <label for="name"> Электронная почта</label>
+            <label for="name"> @ServiceCompany.Email</label>
             @Html.TextBoxFor(x => x.Email)
             @Html.ValidationMessageFor(x => x.Email)
-            <label for="name"> Пароль</label>
+            <label for="name"> @ServiceCompany.Password</label>
             @Html.TextBoxFor(x => x.Password)
             @Html.ValidationMessageFor(x => x.Password)
 
-            <input type="submit" value="Внести изменения" />
+            <input type="submit" value="@ServiceCompany.ChangeButton" />
         </form>
         <div class="task-table short-table">
-            <div class="short-table"> Мои заявки</div>
+            <div class="short-table"> @ServiceCompany.MyTasks</div>
             <div class="full-table">
-                <div class="table-name">Мои заявки</div>
+                <div class="table-name">@ServiceCompany.MyTasks</div>
                 <table border="1">
                     <thead>
                         <tr>
                             @if (Model.CurrentUserTasks.Count > 0)
                             {
-                                @foreach (var statusField in Model.CurrentUserTasks.FirstOrDefault().GetType().GetProperties())
+                                @foreach (var statusField in Model.CurrentUserTasks
+                                .FirstOrDefault().GetType().GetProperties())
                                 {
                                     <th>@statusField.Name</th>
                                 }
                             }
-                            <th>Изменить</th>
-                            <th>Удалить</th>
+                            <th>@ServiceCompany.Change</th>
+                            <th>@ServiceCompany.Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,25 +74,27 @@
                                     <td> @statusField.GetValue(status)</td>
                                 }
                                 <td>
-                                    <a href="/ServiceCompany/UpdateStatus?statusId=@status.Id">Изменить</a>
+                                    <a href="/ServiceCompany/UpdateStatus?statusId=@status.Id">@ServiceCompany.Change</a>
                                 </td>
                                 <td>
                                     <form action="/ServiceCompany/RemoveStatus" class="remove-form" method="post">
                                         <input type="hidden" name="id" value="@status.Id" />
-                                        <button class="admin-panel-button" type="submit">Удалить</button>
+                                        <button class="admin-panel-button" type="submit">@ServiceCompany.RemoveButton</button>
                                     </form>
                                 </td>
                             </tr>
                         }
                         <tr>
                             <td>
-                                <a href="/ServiceCompany/AddStatus">Добавить</a>
+                                <a href="/ServiceCompany/AddStatus">@ServiceCompany.Add</a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
+        </div>
+        <div>
+            @ServiceCompany.Languages: <span class="lang">ru-RU</span> || <span class="lang">en-EN</span>
         </div>
     </div>
 </main>
