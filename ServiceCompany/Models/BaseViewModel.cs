@@ -2,7 +2,7 @@
 {
     public class BaseViewModel
     {
-        public string CurrentUserName { get; set; }
+        public string? CurrentUserName { get; set; }
 
         public bool IsSuperAdmin { get; set; } = false;
 
