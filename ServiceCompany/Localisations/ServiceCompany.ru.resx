@@ -129,6 +129,9 @@
   <data name="AlertsPanel" xml:space="preserve">
     <value>Панель уведомлений</value>
   </data>
+  <data name="AllMembers" xml:space="preserve">
+    <value>Участников</value>
+  </data>
   <data name="AllProjects" xml:space="preserve">
     <value>Всего проектов</value>
   </data>
@@ -173,6 +176,9 @@
   </data>
   <data name="LogOut" xml:space="preserve">
     <value>Выйти</value>
+  </data>
+  <data name="Managers" xml:space="preserve">
+    <value>Менеджеров</value>
   </data>
   <data name="MenuDropButton" xml:space="preserve">
     <value>Меню</value>
@@ -221,6 +227,9 @@
   </data>
   <data name="UserLastName" xml:space="preserve">
     <value>Фамилия</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Пользователей</value>
   </data>
   <data name="WelcomeStartPage" xml:space="preserve">
     <value>Добро пожаловать на</value>
