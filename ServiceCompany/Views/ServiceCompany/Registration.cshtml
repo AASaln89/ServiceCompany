@@ -1,0 +1,33 @@
+﻿@using ServiceCompany.DbStuff.Models.Enums
+@model RegistrationViewModel
+
+@{
+    Layout = "_LayoutServiceCompany";
+}
+
+@section Style
+{
+    <link href="~/css/ServiceCompany.css" rel="stylesheet" />
+    <link href="~/css/Styles.css" rel="stylesheet" />
+}
+
+<div class="regContainer">
+    <h2>Регистрация</h2>
+    <form method="post">
+        <label for="name">Ваша почта:</label>
+        @Html.TextBoxFor(x => x.Email)
+        @Html.ValidationMessageFor(x =>x.Email)
+
+        <label for="nickName">Ваш ник на сайте (виден другим пользователям):</label>
+        @Html.TextBoxFor(x => x.NickName)
+        @Html.ValidationMessageFor(x => x.NickName)
+
+        <label for="password">Ваш пароль:</label>
+        @Html.PasswordFor(x => x.Password)
+        @Html.ValidationMessageFor(x => x.Password)
+
+        <button class="button" type="submit">Зарегистрироваться</button>
+    </form>
+</div>
+
+

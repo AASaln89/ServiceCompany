@@ -1,0 +1,29 @@
+﻿@using ServiceCompany.DbStuff.Models.Enums
+@model LoginViewModel
+
+@{
+    Layout = "_LayoutServiceCompany";
+}
+
+@section Style
+{
+    <link href="~/css/ServiceCompany.css" rel="stylesheet" />
+    <link href="~/css/Styles.css" rel="stylesheet" />
+}
+
+<main>
+    <div class="loginContainer">
+        <h2>Авторизация</h2>
+        <form method="post" class="loginForm" action="/Auth/Login">
+            <label for="name">Ваша почта:</label>
+            @Html.TextBoxFor(x => x.Email)
+
+            <label for="password">Пароль:</label>
+            @Html.PasswordFor(x => x.Password)
+
+            <button class="button" type="submit">Войти</button>
+
+            <a class="reg-ref" href="/ServiceCompany/Registration">Регистрация</a>
+        </form>
+    </div>
+</main>

@@ -1,0 +1,73 @@
+﻿@model IndexViewModel
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    @RenderSection("Style", false)
+    @RenderSection("Script", false)
+    <link href="~/css/ServiceCompany.css" rel="stylesheet" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    @await Html.PartialAsync("_AlertPartial")
+</head>
+<body>
+    <header>
+        <nav class="top-panel-content" id="navbar">
+            <div>
+                Всего проектов: @Model.Projects?.Count
+            </div>
+            <div>
+                Всего задач: @Model.AllTasks.Count
+            </div>
+            <div>
+                Задач выполнено: @Model.CompletedTasks?.Count()
+            </div>
+            <div>
+                Задач в процессе: @Model.WorkInProgressTasks?.Count()
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="dropdown">
+            <button class="dropbtn">
+                <img class="menu" src="icon.jpg" alt="Меню" id="menuIcon">
+            </button>
+            <div class="dropdown-content">
+                <a class="login" href="/ServiceCompany/Index">На главную</a>
+                <a class="login" href="/ServiceCompany/About">О нас</a>
+                <a class="login" href="/ServiceCompany/Contacts">Контакты</a>
+                <a class="login" href="/ServiceCompany/Blog">Блог</a>
+                @if (User?.Identity?.IsAuthenticated == true)
+                {
+                    <a class="login" href="/ServiceCompany/Profile">Профиль</a>
+                    <a class="login" href="/Auth/Logout">Выйти</a>
+                }
+                else
+                {
+                    <a class="login" href="/Auth/Login">Войти</a>
+                    <a class="reg" href="/ServiceCompany/Registration">Регистрация</a>
+                }
+                @if (Model.IsAdmin)
+                {
+                    <a class="alert-source" href="/ServiceCompany/AdminPanel">Администрирование</a>
+                    <a class="alert-source" href="/Alert/AddAlert">Уведомления</a>
+                }
+                @if (Model.IsSuperAdmin)
+                {
+                    <a class="alert-source" href="/ServiceCompany/AdminPanel">Администрирование</a>
+                    <a class="alert-source" href="/Alert/AddAlert">Уведомления</a>
+                    <a class="crud-mongo" href="/Jpg/Index">Mongo</a>
+                    <a class="crud-mongo" href="/Info/Index">API</a>
+                }
+            </div>
+        </div>
+        @RenderBody()
+    </main>
+    <footer id="blueFooter">
+        <div id="footerContainer">
+            <p>&copy; 2024 Мой Дом. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>

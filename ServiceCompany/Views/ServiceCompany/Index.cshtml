@@ -1,0 +1,46 @@
+﻿@using ServiceCompany.DbStuff.Models.Enums
+@model IndexViewModel
+
+@{
+    Layout = "_LayoutServiceCompanyIndex";
+}
+
+@section Style
+{
+    <link href="~/css/ServiceCompany.css" rel="stylesheet" />
+    <link href="~/css/alerts.css" rel="stylesheet" />
+}
+
+@section Script
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+}
+
+<div class="content-container">
+    <h2 class="h2">Добро пожаловать на стартовую страницу!</h2>
+    <p class="p">Здесь вы можете разместить важную информацию или предложения для пользователей.</p>
+    
+    <div class="userstat">
+        <ul>
+            <li><a href="/ServiceCompany/Index">Всего участников</a></li>
+            <li><a href="/ServiceCompany/IndexUsers">Пользователей</a></li>
+            <li><a href="/ServiceCompany/IndexAdmins">Админов</a></li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            @foreach (var user in Model.Users)
+            {
+                <li>
+                    <div>
+                        <span>@user.NickName | @user.MemberRole.</span>
+                    </div>
+                </li>
+            }
+        </ul>
+        <div>
+            Количество участников @Model.Users.Count
+        </div>
+    </div>
+</div>

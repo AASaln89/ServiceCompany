@@ -1,0 +1,66 @@
+﻿@using ServiceCompany.Models.MongoViewModels
+@model IndexMongoViewModel
+
+@{
+    Layout = "_LayoutServiceCompanyMongo";
+}
+
+@section Style
+{
+    <link href="~/css/info.css" rel="stylesheet" />
+}
+
+@section Script {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/info.js"></script>
+}
+
+<div class="fileJpg-container">
+    <h2>Upload Model</h2>
+    <div>
+        @foreach (var file in @Model.FilesJpg)
+        {
+            <div>
+                @file.Name = @file.Id
+                <span>
+                    <form action="/Jpg/RemoveJpg " method="post">
+                        <input type="hidden" name="id" value="@file.Id" />
+                        <input type="submit" value="Remove" />
+                    </form>
+                </span>
+            </div>
+        }
+    </div>
+    <div>
+        <form method="post" action="/Jpg/AddJpg">
+            <label for="name">Insert text: </label>
+            <input type="text" name="name" />
+            <input type="submit" value="Add" />
+        </form>
+    </div>
+
+    <h2>Upload File</h2>
+    <div>
+        <form action="/Jpg/UploadFile" method="post" enctype="multipart/form-data">
+            <div>
+                <label for="file">Select File: </label>
+                <input type="file" name="file" accept=".txt, .docx, .xlsx" />
+            </div>
+            <input type="submit" value="Upload" />
+        </form>
+    </div>
+    <div>
+        @foreach (var file in @Model.Files)
+        {
+            <div>
+                @file.FileName = @file.Id
+                <span>
+                    <form action="/Jpg/RemoveFile" method="post">
+                        <input type="hidden" name="id" value="@file.Id" />
+                        <input type="submit" value="Remove" />
+                    </form>
+                </span>
+            </div>
+        }
+    </div>
+</div>
