@@ -4,7 +4,7 @@ using ServiceCompany.DbStuff.Repositories;
 
 namespace ServiceCompany.DbStuff
 {
-    public static class SeedExtention
+    public static class SeedExtension
     {
         public static void Seed(WebApplication app)
         {
@@ -17,16 +17,18 @@ namespace ServiceCompany.DbStuff
 
         private static void SeedRole(IServiceProvider di)
         {
-            var permissionRepository = di.GetService<MemberRoleRepository>();
+            var roleRepository = di.GetService<MemberRoleRepository>();
 
-            if (permissionRepository.Any() == false)
+            if (roleRepository.Any() == false)
             {
-                foreach (string memberPermission in Enum.GetNames(typeof(MemberRoleEnum)))
+                foreach (string memberRole in Enum.GetNames(typeof(MemberRoleEnum)))
                 {
-                    var permission = new MemberRole();
-                    permission.Role = memberPermission.Replace('Z', ' ');
+                    var role = new MemberRole()
+                    {
+                        Role = memberRole,
+                    };
 
-                    permissionRepository.Add(permission);
+                    roleRepository.Add(role);
                 }
             }
         }

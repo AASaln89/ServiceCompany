@@ -67,7 +67,7 @@ var app = builder.Build();
 
 app.UseCors();
 
-SeedExtention.Seed(app);
+SeedExtension.Seed(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

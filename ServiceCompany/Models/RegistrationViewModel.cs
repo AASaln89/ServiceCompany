@@ -7,16 +7,16 @@ namespace ServiceCompany.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Обязательное поле")]
-        [RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$", ErrorMessage = "Поле должно содержать @ и .")]
+        //[RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$", ErrorMessage = "Поле должно содержать @ и .")]
+        [Required]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Обязательное поле")]
-        [MaxLength(20, ErrorMessage = "Максимальная длина 20 символов")]
+        //[MaxLength(20, ErrorMessage = "Максимальная длина 20 символов")]
+        [Required]
         public string NickName { get; set; }
 
-        [Required(ErrorMessage = "Обязательное поле")]
-        [CheckPasswordRegView]
+        //[CheckPasswordRegView]
+        [Required]
         public string Password { get; set; }
     }
 }

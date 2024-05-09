@@ -369,13 +369,20 @@ namespace ServiceCompany.Controllers
         public IActionResult Registration()
         {
             var model = new RegistrationViewModel();
-
+            CheckUser(model);
             return View(model);
         }
-        
+
         [HttpPost]
         public IActionResult Registration(RegistrationViewModel registrationViewModel)
         {
+            CheckUser(registrationViewModel);
+
+            if (!ModelState.IsValid)
+            {
+                return View(registrationViewModel);
+            }
+
             var user = new User
             {
                 Email = registrationViewModel.Email,
@@ -388,19 +395,7 @@ namespace ServiceCompany.Controllers
             };
             user.Profile = userProfile;
 
-            if (!ModelState.IsValid)
-            {
-                return View(registrationViewModel);
-            }
-
-            try
-            {
-                _userRepository.Add(user);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("RegError");
-            }
+            _userRepository.Add(user);
 
             return RedirectToAction("Login", "Auth");
         }
@@ -432,7 +427,7 @@ namespace ServiceCompany.Controllers
             {
                 Name = companyViewModel.CompanyName,
                 ShortName = companyViewModel.CompanyShortName,
-                
+
             };
             var companyProfile = new CompanyProfile
             {
@@ -651,7 +646,7 @@ namespace ServiceCompany.Controllers
 
         [HttpGet]
         [UserOnly]
-        public IActionResult AddTask() 
+        public IActionResult AddTask()
         {
             var model = new TaskViewModel();
 
@@ -680,7 +675,7 @@ namespace ServiceCompany.Controllers
 
             _userTaskRepository.Add(task);
 
-            return RedirectToAction("Profile", new {Id = task.Author.Id});
+            return RedirectToAction("Profile", new { Id = task.Author.Id });
         }
 
         private void CheckUser(BaseViewModel model)
@@ -688,7 +683,7 @@ namespace ServiceCompany.Controllers
             var user = _authService.GetCurrentUser();
             if (user is not null)
             {
-                if (user ?.MemberRole?.Id == 5)
+                if (user?.MemberRole?.Id == 5)
                 {
                     model.IsUser = true;
                 }
