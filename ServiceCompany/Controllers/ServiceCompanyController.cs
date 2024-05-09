@@ -192,11 +192,11 @@ namespace ServiceCompany.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Blog()
+        public IActionResult Chat()
         {
-            var dbArticles = _articleRepository.GetAll();
+            var dbArticles = _articleRepository.GetAllWithAuthor();
 
-            var blogViewModel = new BlogViewModel();
+            var blogViewModel = new ChatViewModel();
             blogViewModel.UserNickName = _authService.GetCurrentUserNickName();
 
             blogViewModel.Articles =

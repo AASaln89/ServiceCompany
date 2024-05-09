@@ -144,6 +144,7 @@ footer {
         .userstat a:hover {
             background-color: #555;
         }
+
 .task-table {
     cursor: pointer;
 }
@@ -152,13 +153,18 @@ footer {
         color: red;
     }
 
-.task-table.short-table .full-table {
-    display: none;
+        .task-table.short-table .full-table {
+            display: none;
+        }
+
+.table-name {
+    color: green;
 }
-    .table-name {
-        color: green;
-    }
 
 .task-table.full-table .short-table {
     display: none;
+}
+
+.lang {
+    cursor: pointer;
 }

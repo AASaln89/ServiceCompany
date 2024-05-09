@@ -1,6 +1,6 @@
 ﻿namespace ServiceCompany.Models
 {
-    public class BlogViewModel : BaseViewModel
+    public class ChatViewModel : BaseViewModel
     {
         public string? UserNickName { get; set; }
 

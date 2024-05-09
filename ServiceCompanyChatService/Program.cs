@@ -8,7 +8,6 @@ builder.Services.AddCors(option =>
 {
     option.AddDefaultPolicy(policy =>
     {
-        //policy.WithHeaders("Smile", "Credential");
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
         policy.SetIsOriginAllowed(url => true);
@@ -18,15 +17,15 @@ builder.Services.AddCors(option =>
 
 builder.Services.AddSignalR();
 
-var connStringChatMc = builder.Configuration.GetConnectionString("ServiceCompanyChat");
+var connStringChat = builder.Configuration.GetConnectionString("ServiceCompanyChat");
 
-builder.Services.AddDbContext<ChatDbContext>(x => x.UseSqlServer(connStringChatMc));
+builder.Services.AddDbContext<ChatDbContext>(x => x.UseSqlServer(connStringChat));
 
 var app = builder.Build();
 
 app.UseCors();
 
-app.MapHub<BlogHub>("/Blog");
+app.MapHub<BlogHub>("/chat");
 
 app.MapGet("/", () => "Hello World!");
 

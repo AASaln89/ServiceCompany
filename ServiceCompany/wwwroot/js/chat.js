@@ -3,11 +3,11 @@
     const userName = $(".user-name").val();
 
     const hub = new signalR.HubConnectionBuilder()
-        .withUrl("http://localhost:5122/Blog")
+        .withUrl("http://localhost:5122/chat")
         .build();
 
-    hub.on('newComment', function (user, comment, userId, articleId) {
-        addComment(user, comment, userId, articleId);
+    hub.on('newComment', function (user, comment) {
+        addComment(user, comment);
     });
 
     hub.on('newUserEnterToChat', function (user) {
@@ -77,8 +77,6 @@
         const newMessageBlock = $('.comment.template').clone();
         newMessageBlock.removeClass('template');
         newMessageBlock.find('.user-name').text(user).css('color', 'red');
-        newMessageBlock.find('.comment-text').text(': ' + comment);
-        newMessageBlock.find('.comment-text').text(': ' + comment);
         newMessageBlock.find('.comment-text').text(': ' + comment);
 
         $('.comments').append(newMessageBlock);

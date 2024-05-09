@@ -13,12 +13,10 @@ namespace ServiceCompanyChatService.SignalRHubs
             _dbContext = dbContext;
         }
 
-        public void SendComment(string userName, string comment, int userId, int articleId)
+        public void SendComment(string userName, string comment)
         {
             var userComment = new Comment()
             {
-                UserId = userId,
-                ArticleId = articleId,
                 UserName = userName,
                 CommentMessage = comment
             };
