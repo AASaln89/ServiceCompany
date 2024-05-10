@@ -9,6 +9,7 @@
     <link href="~/css/ServiceCompany.css" rel="stylesheet" />
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/language.js"></script>
 
     @await Html.PartialAsync("_AlertPartial")
 </head>
@@ -47,7 +48,7 @@
                 else
                 {
                     <a class="login" href="/Auth/Login">@ServiceCompany.LogIn</a>
-                    <a class="reg" href="/ServiceCompany/Registration">@ServiceCompany.Registration</a>
+                    <a class="reg" href="/Auth/Registration">@ServiceCompany.Registration</a>
                 }
                 @if (Model.IsAdmin)
                 {
@@ -67,6 +68,10 @@
     </main>
     <footer id="blueFooter">
         <div id="footerContainer">
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div>@ServiceCompany.Languages: <span class="lang">ru</span> || <span class="lang">en</span></div>
+            }
             <p>@ServiceCompany.FooterRigtsReserved</p>
         </div>
     </footer>

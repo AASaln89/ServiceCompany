@@ -8,9 +8,9 @@ namespace ServiceCompany.Services
     {
         private UserRepository _userRepository;
         private IHttpContextAccessor _httpContextAccessor;
+        public const string LOCAL_LANG_TYPE = "localLanguage";
 
-        public AuthService(
-            IHttpContextAccessor httpContextAccessor,
+        public AuthService(IHttpContextAccessor httpContextAccessor,
             UserRepository userRepository)
         {
             _userRepository = userRepository;
@@ -97,6 +97,18 @@ namespace ServiceCompany.Services
             var idStr = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "id").Value;
             var id = int.Parse(idStr);
             return _userRepository.GetById(id);
+        }
+
+        public string GetCurrentUserLocalLanguage()
+        {
+            return _httpContextAccessor.HttpContext.User
+                .Claims.FirstOrDefault(x => x.Type == LOCAL_LANG_TYPE)
+                ?.Value ?? "en";
+        }
+
+        public bool IsAuthorized()
+        {
+            return _httpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated ?? false;
         }
     }
 }

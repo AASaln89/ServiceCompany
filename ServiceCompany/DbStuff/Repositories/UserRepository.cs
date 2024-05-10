@@ -101,5 +101,12 @@ namespace ServiceCompany.DbStuff.Repositories
 
             _context.SaveChanges();
         }
+
+        public void SwitchLocalLanguage(int userId, string localLang)
+        {
+            var user = GetById(userId);
+            user.PreferLocalLang = localLang;
+            _context.SaveChanges();
+        }
     }
 }

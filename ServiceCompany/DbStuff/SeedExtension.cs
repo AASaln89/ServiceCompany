@@ -46,6 +46,7 @@ namespace ServiceCompany.DbStuff
                     Name = MemberRoleEnum.SuperAdmin.ToString(),
                     Email = "SuperAdmin",
                     Password = "SuperAdmin",
+                    PreferLocalLang = "en",
                     MemberRole = roleRepository?.GetById((int)MemberRoleEnum.SuperAdmin),
                 };
                 var superAdminProfile = new UserProfile()
@@ -60,6 +61,7 @@ namespace ServiceCompany.DbStuff
                     Name = MemberRoleEnum.Admin.ToString(),
                     Email = "Admin",
                     Password = "Admin",
+                    PreferLocalLang = "en",
                     MemberRole = roleRepository?.GetById((int)MemberRoleEnum.Admin)
                 };
                 var adminProfile = new UserProfile();
@@ -71,6 +73,7 @@ namespace ServiceCompany.DbStuff
                     Name = MemberRoleEnum.Manager.ToString(),
                     Email = "Manager",
                     Password = "Manager",
+                    PreferLocalLang = "en",
                     MemberRole = roleRepository?.GetById((int)MemberRoleEnum.Manager)
                 };
                 var managerProfile = new UserProfile();
@@ -82,6 +85,7 @@ namespace ServiceCompany.DbStuff
                     Name = MemberRoleEnum.User.ToString(),
                     Email = "User",
                     Password = "User",
+                    PreferLocalLang = "en",
                     MemberRole = roleRepository?.GetById((int)MemberRoleEnum.User)
                 };
                 var userProfile = new UserProfile();

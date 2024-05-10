@@ -9,6 +9,8 @@ namespace ServiceCompany.DbStuff.Models
 
         public string Password { get; set; }
 
+        public string PreferLocalLang { get; set; }
+
         public DateTime? ExpireDate { get; set; }
 
         public virtual Company? Company { get; set; }

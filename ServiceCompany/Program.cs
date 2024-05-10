@@ -8,12 +8,14 @@ using ServiceCompany.Hubs;
 using ServiceCompany.Services;
 using Microsoft.EntityFrameworkCore;
 using ServiceCompany.Middlewares;
+using ServiceCompany.ApiServices;
+using ServiceCompany.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddAuthentication(AuthController.AUTH_KEY_MC)
-    .AddCookie(AuthController.AUTH_KEY_MC, option =>
+    .AddAuthentication(AuthController.AUTH_KEY)
+    .AddCookie(AuthController.AUTH_KEY, option =>
     {
         option.AccessDeniedPath = "/auth/deny";
         option.LoginPath = "/Auth/Login";
@@ -32,7 +34,6 @@ builder.Services.AddCors(option =>
 
 builder.Services.AddHostedService<AlertMaintenance>();
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var connStringManagementCompany = builder.Configuration.GetConnectionString("ServiceCompany");
@@ -60,6 +61,17 @@ builder.Services.AddScoped<UploadFileHelper>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserBusinessService>();
 builder.Services.AddScoped<ReflectionService>();
+builder.Services.AddSingleton<WeatherViewModelBuilder>();
+
+builder.Services.AddHttpClient<NumberApi>(cl =>
+{
+    cl.BaseAddress = new Uri("http://numbersapi.com");
+});
+
+builder.Services.AddHttpClient<WeatherApi>(cl =>
+{
+    cl.BaseAddress = new Uri("http://api.open-meteo.com");
+});
 
 builder.Services.AddHttpContextAccessor();
 
@@ -77,15 +89,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseMiddleware<LocalisationMiddleware>();
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Who I am?
-app.UseAuthorization(); // May I?
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseMiddleware<LocalisationMiddleware>();
 
 app.MapHub<AlertHub>("/signalr-hubs/alert");
 

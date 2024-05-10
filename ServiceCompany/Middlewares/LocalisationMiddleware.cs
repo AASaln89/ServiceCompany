@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using ServiceCompany.Services;
+using System.Globalization;
 
 namespace ServiceCompany.Middlewares
 {
@@ -14,18 +15,23 @@ namespace ServiceCompany.Middlewares
         public async Task InvokeAsync(HttpContext context)
         {
             CultureInfo culture;
-            var localLanguageFromCookie = context.Request.Cookies["languages"];
 
-            if (localLanguageFromCookie is null)
+            var authService = context.RequestServices.GetService<AuthService>();
+            if (authService.IsAuthorized())
             {
-                string acceptLanguage = context.Request.Headers.AcceptLanguage;
-                var localLanguage = acceptLanguage.Substring(0, 5);
-
-                culture = new CultureInfo(localLanguage);
+                culture = new CultureInfo(authService.GetCurrentUserLocalLanguage());
+            }
+            else if (context.Request.Cookies["languages"] is not null)
+            {
+                var localLanguageFromCookie = context.Request.Cookies["languages"];
+                culture = new CultureInfo(localLanguageFromCookie);
             }
             else
             {
-                culture = new CultureInfo(localLanguageFromCookie);
+                string acceptLanguage = context.Request.Headers.AcceptLanguage;
+                var localLanguage = acceptLanguage.Substring(0, 2);
+
+                culture = new CultureInfo(localLanguage);
             }
 
             Thread.CurrentThread.CurrentCulture = culture;
