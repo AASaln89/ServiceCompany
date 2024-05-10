@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
+using ServiceCompany.ApiServices;
 
 namespace ServiceCompany.Controllers
 {
@@ -24,6 +25,9 @@ namespace ServiceCompany.Controllers
         private TaskStatusRepository _taskStatusRepository;
         private AuthService _authService;
         private UserBusinessService _userBusinessService;
+        private NumberApi _numberApi;
+        private WeatherApi _weatherApi;
+        private WeatherViewModelBuilder _weatherViewModelBuilder;
 
         private IWebHostEnvironment _webHostEnvironment;
 
@@ -38,7 +42,10 @@ namespace ServiceCompany.Controllers
             TaskStatusRepository taskStatusRepository,
             ArticleRepository articleRepository,
             UserBusinessService userBusinessService,
-            UserProfileRepository userProfileRepository)
+            UserProfileRepository userProfileRepository,
+            NumberApi numberApi,
+            WeatherApi weatherApi,
+            WeatherViewModelBuilder weatherViewModelBuilder)
         {
             _companyRepository = companyRepository;
             _projectRepository = projectRepository;
@@ -51,9 +58,12 @@ namespace ServiceCompany.Controllers
             _articleRepository = articleRepository;
             _userBusinessService = userBusinessService;
             _userProfileRepository = userProfileRepository;
+            _numberApi = numberApi;
+            _weatherApi = weatherApi;
+            _weatherViewModelBuilder = weatherViewModelBuilder;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var dbAllTasks = _userTaskRepository.GetAll()
                 .ToList();
@@ -99,10 +109,22 @@ namespace ServiceCompany.Controllers
 
             viewModel.Users = _userBusinessService.GetUsersAndManagers();
 
+            var number = DateTime.Now.Second;
+            var justFactTask = _numberApi.GetFact(number);
+            var mathFactTask = _numberApi.GetMathFact(number);
+            var weatherTask = _weatherApi.GetWeather();
+
+            Task.WaitAll(justFactTask, mathFactTask, weatherTask);
+
+            viewModel.Number = number;
+            viewModel.JustFact = justFactTask.Result;
+            viewModel.MathFact = mathFactTask.Result;
+            viewModel.WeatherViewModel = _weatherViewModelBuilder.Build(weatherTask.Result);
+
             return View(viewModel);
         }
 
-        public IActionResult IndexUsers()
+        public async Task<IActionResult> IndexUsers()
         {
             var dbAllTasks = _userTaskRepository.GetAll();
 
@@ -144,10 +166,22 @@ namespace ServiceCompany.Controllers
 
             viewModel.Users = _userBusinessService.GetUsers();
 
+            var number = DateTime.Now.Second;
+            var justFactTask = _numberApi.GetFact(number);
+            var mathFactTask = _numberApi.GetMathFact(number);
+            var weatherTask = _weatherApi.GetWeather();
+
+            Task.WaitAll(justFactTask, mathFactTask, weatherTask);
+
+            viewModel.Number = number;
+            viewModel.JustFact = justFactTask.Result;
+            viewModel.MathFact = mathFactTask.Result;
+            viewModel.WeatherViewModel = _weatherViewModelBuilder.Build(weatherTask.Result);
+
             return View(viewModel);
         }
 
-        public IActionResult IndexAdmins()
+        public async Task<IActionResult> IndexAdmins()
         {
             var dbAllTasks = _userTaskRepository.GetAll();
 
@@ -189,6 +223,18 @@ namespace ServiceCompany.Controllers
 
             viewModel.Users = _userBusinessService.GetManagers();
 
+            var number = DateTime.Now.Second;
+            var justFactTask = _numberApi.GetFact(number);
+            var mathFactTask = _numberApi.GetMathFact(number);
+            var weatherTask = _weatherApi.GetWeather();
+
+            Task.WaitAll(justFactTask, mathFactTask, weatherTask);
+
+            viewModel.Number = number;
+            viewModel.JustFact = justFactTask.Result;
+            viewModel.MathFact = mathFactTask.Result;
+            viewModel.WeatherViewModel = _weatherViewModelBuilder.Build(weatherTask.Result);
+
             return View(viewModel);
         }
 
@@ -226,13 +272,6 @@ namespace ServiceCompany.Controllers
         }
 
         public IActionResult Contacts()
-        {
-            var model = new BaseViewModel();
-            CheckUser(model);
-            return View(model);
-        }
-
-        public IActionResult LogError()
         {
             var model = new BaseViewModel();
             CheckUser(model);
@@ -348,6 +387,8 @@ namespace ServiceCompany.Controllers
 
             var user = _authService.GetCurrentMcUser();
 
+            model.CurrentLocalLang = _authService.GetCurrentUserLocalLanguage();
+
             var userTasks = _userTaskRepository.GetCurrentUserTasks(user);
 
             model.CurrentUserTasks = userTasks.Select(userTask => new TaskViewModel
@@ -364,40 +405,6 @@ namespace ServiceCompany.Controllers
             CheckUser(model);
 
             return View(model);
-        }
-
-        public IActionResult Registration()
-        {
-            var model = new RegistrationViewModel();
-            CheckUser(model);
-            return View(model);
-        }
-
-        [HttpPost]
-        public IActionResult Registration(RegistrationViewModel registrationViewModel)
-        {
-            CheckUser(registrationViewModel);
-
-            if (!ModelState.IsValid)
-            {
-                return View(registrationViewModel);
-            }
-
-            var user = new User
-            {
-                Email = registrationViewModel.Email,
-                Password = registrationViewModel.Password,
-                MemberRole = _memberRoleRepository.GetById((int)MemberRoleEnum.User),
-            };
-            var userProfile = new UserProfile
-            {
-                NickName = registrationViewModel.NickName,
-            };
-            user.Profile = userProfile;
-
-            _userRepository.Add(user);
-
-            return RedirectToAction("Login", "Auth");
         }
 
         [HttpGet]

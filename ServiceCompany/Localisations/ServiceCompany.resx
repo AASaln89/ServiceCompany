@@ -138,6 +138,9 @@
   <data name="AllTasks" xml:space="preserve">
     <value>All tasks</value>
   </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Authorization</value>
+  </data>
   <data name="Change" xml:space="preserve">
     <value>Update</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="FooterRigtsReserved" xml:space="preserve">
     <value>@ 2024 My App. All rights reserved</value>
+  </data>
+  <data name="GoTo" xml:space="preserve">
+    <value>Go to</value>
   </data>
   <data name="Icon" xml:space="preserve">
     <value>Profile icon</value>
@@ -201,6 +207,9 @@
   <data name="Profile" xml:space="preserve">
     <value>My profile</value>
   </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
   <data name="Registration" xml:space="preserve">
     <value>Registration</value>
   </data>
@@ -216,6 +225,9 @@
   <data name="StartPageLink" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="SwitchLang" xml:space="preserve">
+    <value>Switch to</value>
+  </data>
   <data name="TeatAPI" xml:space="preserve">
     <value>API</value>
   </data>
@@ -230,6 +242,9 @@
   </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>
+  </data>
+  <data name="VisibleOnPage" xml:space="preserve">
+    <value>Visible to all users</value>
   </data>
   <data name="WelcomeStartPage" xml:space="preserve">
     <value>Welcome to the </value>

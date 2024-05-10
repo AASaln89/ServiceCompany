@@ -16,6 +16,8 @@
 
         public string Password { get; set; }
 
+        public string CurrentLocalLang { get; set; }
+
         public DateTime? ExpireDate { get; set; }
 
         public string? Company { get; set; }

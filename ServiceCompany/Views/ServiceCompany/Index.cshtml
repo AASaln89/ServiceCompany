@@ -40,8 +40,18 @@
                 </li>
             }
         </ul>
-        <div>
-            @ServiceCompany.NumberOf @ServiceCompany.AllMembers @Model.Users.Count
-        </div>
+        <nav>
+            <div>
+                @Model.JustFact
+            </div>
+            <div>
+                @Model.MathFact
+            </div>
+        </nav>
+        <nav>
+            <div>
+                Now @Model.WeatherViewModel.TemperatureNow cels
+            </div>
+        </nav>
     </div>
 </div>

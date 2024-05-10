@@ -86,6 +86,7 @@ namespace ServiceCompany.BusinessServices
             {
                 Email = executorViewModel.Email,
                 Password = executorViewModel.Password,
+                PreferLocalLang = "en",
                 ExpireDate = executorViewModel.ExpireDate,
             };
             var executorProfile = new UserProfile();

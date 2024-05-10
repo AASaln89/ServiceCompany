@@ -138,6 +138,9 @@
   <data name="AllTasks" xml:space="preserve">
     <value>Всего задач</value>
   </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Войти</value>
+  </data>
   <data name="Change" xml:space="preserve">
     <value>Изменить</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="FooterRigtsReserved" xml:space="preserve">
     <value>@ 2024 Мой Дом. Все права защищены.</value>
+  </data>
+  <data name="GoTo" xml:space="preserve">
+    <value>Вернуться</value>
   </data>
   <data name="Icon" xml:space="preserve">
     <value>Аватар</value>
@@ -201,6 +207,9 @@
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
   </data>
+  <data name="Register" xml:space="preserve">
+    <value>Зарегистрироваться</value>
+  </data>
   <data name="Registration" xml:space="preserve">
     <value>Регистрация</value>
   </data>
@@ -216,6 +225,9 @@
   <data name="StartPageLink" xml:space="preserve">
     <value>Домой</value>
   </data>
+  <data name="SwitchLang" xml:space="preserve">
+    <value>Переключить на</value>
+  </data>
   <data name="TeatAPI" xml:space="preserve">
     <value>API</value>
   </data>
@@ -230,6 +242,9 @@
   </data>
   <data name="Users" xml:space="preserve">
     <value>Пользователей</value>
+  </data>
+  <data name="VisibleOnPage" xml:space="preserve">
+    <value>виден другим пользователям</value>
   </data>
   <data name="WelcomeStartPage" xml:space="preserve">
     <value>Добро пожаловать на</value>

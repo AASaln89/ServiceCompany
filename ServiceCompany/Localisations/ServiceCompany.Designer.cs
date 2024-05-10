@@ -124,6 +124,15 @@ namespace ServiceCompany.Localisations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authorization.
+        /// </summary>
+        public static string Authorization {
+            get {
+                return ResourceManager.GetString("Authorization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string Change {
@@ -192,6 +201,15 @@ namespace ServiceCompany.Localisations {
         public static string FooterRigtsReserved {
             get {
                 return ResourceManager.GetString("FooterRigtsReserved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to.
+        /// </summary>
+        public static string GoTo {
+            get {
+                return ResourceManager.GetString("GoTo", resourceCulture);
             }
         }
         
@@ -313,6 +331,15 @@ namespace ServiceCompany.Localisations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registration.
         /// </summary>
         public static string Registration {
@@ -358,6 +385,15 @@ namespace ServiceCompany.Localisations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switch to.
+        /// </summary>
+        public static string SwitchLang {
+            get {
+                return ResourceManager.GetString("SwitchLang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to API.
         /// </summary>
         public static string TeatAPI {
@@ -399,6 +435,15 @@ namespace ServiceCompany.Localisations {
         public static string Users {
             get {
                 return ResourceManager.GetString("Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visible to all users.
+        /// </summary>
+        public static string VisibleOnPage {
+            get {
+                return ResourceManager.GetString("VisibleOnPage", resourceCulture);
             }
         }
         

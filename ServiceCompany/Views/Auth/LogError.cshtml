@@ -1,4 +1,5 @@
 ﻿@using ServiceCompany.DbStuff.Models.Enums
+@using ServiceCompany.Localisations
 @model BaseViewModel
 
 @{
@@ -18,8 +19,8 @@
         <p>Кажется, мы не нашли вас в системе.</p>
         <p>Проверьте правильность ввода Логина или Пароля.</p>
         <p>
-            Вернуться 
-            <a class="reg" href="/ServiceCompany/Index">на главную?</a>
+            @ServiceCompany.GoTo 
+            <a class="reg" href="/ServiceCompany/Index">@ServiceCompany.StartPage?</a>
         </p>
     </div>
 </main>

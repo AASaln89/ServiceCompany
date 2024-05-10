@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiceCompany.DbStuff;
 
@@ -11,9 +12,11 @@ using ServiceCompany.DbStuff;
 namespace ServiceCompany.Migrations
 {
     [DbContext(typeof(ServiceCompanyDbContext))]
-    partial class ManagementCompanyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240510134453_AddUserLocalLang")]
+    partial class AddUserLocalLang
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("SeenAlertsId");
 
-                    b.ToTable("AlertUser", (string)null);
+                    b.ToTable("AlertUser");
                 });
 
             modelBuilder.Entity("CategoryEntityParameterEntity", b =>
@@ -49,7 +52,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("ParameterCategoriesId");
 
-                    b.ToTable("CategoryEntityParameterEntity", (string)null);
+                    b.ToTable("CategoryEntityParameterEntity");
                 });
 
             modelBuilder.Entity("ElementEntityMaterialEntity", b =>
@@ -64,7 +67,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("MaterialsId");
 
-                    b.ToTable("ElementEntityMaterialEntity", (string)null);
+                    b.ToTable("ElementEntityMaterialEntity");
                 });
 
             modelBuilder.Entity("ElementEntityParameterEntity", b =>
@@ -79,7 +82,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("ParametersId");
 
-                    b.ToTable("ElementEntityParameterEntity", (string)null);
+                    b.ToTable("ElementEntityParameterEntity");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.BasePointEntity", b =>
@@ -109,7 +112,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BasePoints", (string)null);
+                    b.ToTable("BasePoints");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.CategoryEntity", b =>
@@ -151,7 +154,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.DesignOptionEntity", b =>
@@ -197,7 +200,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("DesignOptions", (string)null);
+                    b.ToTable("DesignOptions");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.DocumentEntity", b =>
@@ -236,7 +239,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Documents", (string)null);
+                    b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.ElementEntity", b =>
@@ -390,7 +393,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("Elements", (string)null);
+                    b.ToTable("Elements");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.ElementTypeEntity", b =>
@@ -442,7 +445,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("ParameterEntityId");
 
-                    b.ToTable("Types", (string)null);
+                    b.ToTable("Types");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.GridEntity", b =>
@@ -499,7 +502,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("ElementTypeId");
 
-                    b.ToTable("Grids", (string)null);
+                    b.ToTable("Grids");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.LevelEntity", b =>
@@ -550,7 +553,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("ElementTypeId");
 
-                    b.ToTable("Levels", (string)null);
+                    b.ToTable("Levels");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.LocationEntity", b =>
@@ -605,7 +608,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("Locations", (string)null);
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.MaterialEntity", b =>
@@ -649,7 +652,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("Materials", (string)null);
+                    b.ToTable("Materials");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.ParameterEntity", b =>
@@ -702,7 +705,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("Parameters", (string)null);
+                    b.ToTable("Parameters");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.RevitCategoryEntity", b =>
@@ -739,7 +742,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RevitCategoryEntities", (string)null);
+                    b.ToTable("RevitCategoryEntities");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.UserWorkSet", b =>
@@ -777,7 +780,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("WorkSets", (string)null);
+                    b.ToTable("WorkSets");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.ViewEntity", b =>
@@ -827,7 +830,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("Views", (string)null);
+                    b.ToTable("Views");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.Warning", b =>
@@ -862,7 +865,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("Warnings", (string)null);
+                    b.ToTable("Warnings");
                 });
 
             modelBuilder.Entity("ManagementCompany.DbStuff.ExternalEntities.WarningElementEntity", b =>
@@ -900,7 +903,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("WarningId");
 
-                    b.ToTable("WarningElements", (string)null);
+                    b.ToTable("WarningElements");
                 });
 
             modelBuilder.Entity("ProjectUser", b =>
@@ -915,7 +918,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ProjectUser", (string)null);
+                    b.ToTable("ProjectUser");
                 });
 
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.Alert", b =>
@@ -956,7 +959,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Alerts", (string)null);
+                    b.ToTable("Alerts");
                 });
 
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.Article", b =>
@@ -1001,7 +1004,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Articles", (string)null);
+                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.Company", b =>
@@ -1028,7 +1031,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Companies", (string)null);
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.CompanyProfile", b =>
@@ -1075,7 +1078,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CompanyProfiles", (string)null);
+                    b.ToTable("CompanyProfiles");
                 });
 
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.MemberRole", b =>
@@ -1104,7 +1107,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MemberRoles", (string)null);
+                    b.ToTable("MemberRoles");
                 });
 
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.Project", b =>
@@ -1141,7 +1144,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.User", b =>
@@ -1194,7 +1197,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("MemberRoleId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.UserProfile", b =>
@@ -1235,7 +1238,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserProfiles", (string)null);
+                    b.ToTable("UserProfiles");
                 });
 
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.UserTask", b =>
@@ -1285,7 +1288,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("UserTasks", (string)null);
+                    b.ToTable("UserTasks");
                 });
 
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.UserTaskStatus", b =>
@@ -1315,7 +1318,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TaskStatuses", (string)null);
+                    b.ToTable("TaskStatuses");
                 });
 
             modelBuilder.Entity("ServiceCompanyChatService.DbStuff.Models.Comment", b =>
@@ -1350,7 +1353,7 @@ namespace ServiceCompany.Migrations
 
                     b.HasIndex("ArticleId");
 
-                    b.ToTable("Comment", (string)null);
+                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("AlertUser", b =>

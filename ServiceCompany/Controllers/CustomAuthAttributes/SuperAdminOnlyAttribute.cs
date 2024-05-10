@@ -11,7 +11,7 @@ namespace ServiceCompany.Controllers.CustomAuthAttributes
             var authService = context.HttpContext.RequestServices.GetService<AuthService>();
             if (!authService.IsSuperAdmin())
             {
-                context.Result = new ForbidResult(AuthController.AUTH_KEY_MC);
+                context.Result = new ForbidResult(AuthController.AUTH_KEY);
             }
         }
     }

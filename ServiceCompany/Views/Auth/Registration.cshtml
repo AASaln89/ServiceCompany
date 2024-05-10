@@ -1,4 +1,5 @@
 ﻿@using ServiceCompany.DbStuff.Models.Enums
+@using ServiceCompany.Localisations
 @model RegistrationViewModel
 
 @{
@@ -12,21 +13,21 @@
 }
 
 <div class="regContainer">
-    <h2>Регистрация</h2>
+    <h2>@ServiceCompany.Registration</h2>
     <form method="post">
-        <label for="name">Ваша почта:</label>
+        <label for="name">@ServiceCompany.Email:</label>
         @Html.TextBoxFor(x => x.Email)
         @Html.ValidationMessageFor(x =>x.Email)
 
-        <label for="nickName">Ваш ник на сайте (виден другим пользователям):</label>
+        <label for="nickName">@ServiceCompany.NickName (@ServiceCompany.VisibleOnPage):</label>
         @Html.TextBoxFor(x => x.NickName)
         @Html.ValidationMessageFor(x => x.NickName)
 
-        <label for="password">Ваш пароль:</label>
+        <label for="password">@ServiceCompany.Password:</label>
         @Html.PasswordFor(x => x.Password)
         @Html.ValidationMessageFor(x => x.Password)
 
-        <button class="button" type="submit">Зарегистрироваться</button>
+        <button class="button" type="submit">@ServiceCompany.Register</button>
     </form>
 </div>
 
