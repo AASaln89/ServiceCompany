@@ -46,7 +46,7 @@ namespace ServiceCompany.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAlert(AlertViewModel viewModel, string message, DateTime date)
+        public async Task<IActionResult> AddAlert(AlertViewModel viewModel)
         {
             var lastAlerts = _alertRepository.GetLastAlerts();
 
@@ -60,17 +60,22 @@ namespace ServiceCompany.Controllers
                 })
                 .ToList();
 
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             var alert = new Alert()
             {
-                Message = message,
-                ExpireDate = date,
+                Message = viewModel.Message,
+                ExpireDate = viewModel.ExpireDate,
                 IsRead = true,
                 Author = _authService.GetCurrentMcUser()
             };
 
             _alertRepository.Add(alert);
 
-            await _alertHubContext.Clients.All.PushAlertAsync(message, date, alert.Id);
+            await _alertHubContext.Clients.All.PushAlertAsync(viewModel.Message, viewModel.ExpireDate, alert.Id);
 
             viewModel.IsSuperAdmin = _authService.IsSuperAdmin();
 

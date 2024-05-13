@@ -8,8 +8,8 @@ namespace ServiceCompany.Models.Alerts
         [Required]
         public string Message { get; set; }
         [Required]
-        public DateTime? ExpireDate { get; set; }
+        public DateTime ExpireDate { get; set; }
 
-        public List<AlertViewModel> LastAlerts { get; set; }
+        public List<AlertViewModel>? LastAlerts { get; set; }
     }
 }
