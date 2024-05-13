@@ -1,0 +1,43 @@
+﻿@using ServiceCompany.Localisations
+@using ServiceCompany.Models.TestApiModels
+@model TestApiViewModel
+
+@{
+    Layout = "_LayoutServiceCompany";
+}
+
+@section Style
+{
+    <link href="~/css/ServiceCompany.css" rel="stylesheet" />
+    <link href="~/css/alerts.css" rel="stylesheet" />
+}
+
+@section Script
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+}
+
+<div class="content-container">
+    <div>
+        <nav>
+            <div>
+                Fact about numbers
+            </div>
+            <div>
+                @Model.JustFact
+            </div>
+            <div>
+                @Model.MathFact
+            </div>
+        </nav>
+        <nav>
+            <div>
+                Weather info
+            </div>
+            <div>
+                Now is @Model.WeatherViewModel.TemperatureNow 
+            </div>
+        </nav>
+    </div>
+</div>

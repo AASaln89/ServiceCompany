@@ -231,6 +231,9 @@
   <data name="TeatAPI" xml:space="preserve">
     <value>API</value>
   </data>
+  <data name="TestApi" xml:space="preserve">
+    <value>Тест Api</value>
+  </data>
   <data name="TestMongo" xml:space="preserve">
     <value>MongoDB</value>
   </data>

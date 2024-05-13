@@ -1,4 +1,4 @@
-﻿namespace ServiceCompany.ApiServices
+﻿namespace ServiceCompany.Models.TestApiModels
 {
     public class WeatherViewModel
     {

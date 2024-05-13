@@ -12,6 +12,8 @@ namespace ServiceCompany.DbStuff.Repositories
         {
             return _entities
                 .Include(x=>x.Profile)
+                .Include(x=>x.Author)
+                .ThenInclude(x=>x.Profile)
                 .ToList();
         }
 

@@ -4,10 +4,14 @@
     {
         public string ShortName { get; set; }
 
+        public virtual User? Author { get; set; }
+
         public virtual CompanyProfile Profile { get; set; }
 
         public virtual List<Project>? Projects { get; set; } = new List<Project>();
 
         public virtual List<User>? Users { get; set; } = new List<User>();
+
+        public Company() : base() { }
     }
 }

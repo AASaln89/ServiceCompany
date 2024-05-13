@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiceCompany.DbStuff;
 
@@ -11,9 +12,11 @@ using ServiceCompany.DbStuff;
 namespace ServiceCompany.Migrations
 {
     [DbContext(typeof(ServiceCompanyDbContext))]
-    partial class ManagementCompanyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240511110134_addAuthor")]
+    partial class addAuthor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1709,7 +1712,7 @@ namespace ServiceCompany.Migrations
             modelBuilder.Entity("ServiceCompany.DbStuff.Models.Company", b =>
                 {
                     b.HasOne("ServiceCompany.DbStuff.Models.User", "Author")
-                        .WithMany("CreatedCompanies")
+                        .WithMany()
                         .HasForeignKey("AuthorId");
 
                     b.HasOne("ServiceCompany.DbStuff.Models.CompanyProfile", "Profile")
@@ -1905,8 +1908,6 @@ namespace ServiceCompany.Migrations
                     b.Navigation("Articles");
 
                     b.Navigation("CreatedAlerts");
-
-                    b.Navigation("CreatedCompanies");
 
                     b.Navigation("CreatedProjects");
 
