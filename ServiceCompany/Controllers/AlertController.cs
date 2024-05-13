@@ -60,11 +60,6 @@ namespace ServiceCompany.Controllers
                 })
                 .ToList();
 
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(viewModel);
-            //}
-
             var alert = new Alert()
             {
                 Message = message,
