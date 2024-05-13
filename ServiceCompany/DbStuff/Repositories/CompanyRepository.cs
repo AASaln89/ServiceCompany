@@ -24,6 +24,13 @@ namespace ServiceCompany.DbStuff.Repositories
                 .First(x => x.Id == id);
         }
 
+        public Company GetTestCompany()
+        {
+            return _entities
+                .Include(x => x.Profile)
+                .FirstOrDefault(x => x.Name == "TestCompany");
+        }
+
         public void UpdateCompany(CompanyViewModel viewModel, int id, int statusId)
         {
             var company = _context.Companies

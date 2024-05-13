@@ -12,6 +12,8 @@ namespace ServiceCompany.DbStuff
             {
                 SeedRole(serviceScope.ServiceProvider);
                 SeedUser(serviceScope.ServiceProvider);
+                SeedCompany(serviceScope.ServiceProvider);
+                SeedProject(serviceScope.ServiceProvider);
             }
         }
 
@@ -52,8 +54,10 @@ namespace ServiceCompany.DbStuff
                 var superAdminProfile = new UserProfile()
                 {
                     NickName = MemberRoleEnum.SuperAdmin.ToString(),
+                    FirstName = "Super",
+                    LastName = "Admin",
+                    User = superAdmin,
                 };
-                superAdminProfile.User = superAdmin;
                 userProfileRepository.Add(superAdminProfile);
 
                 var admin = new User
@@ -64,8 +68,13 @@ namespace ServiceCompany.DbStuff
                     PreferLocalLang = "en",
                     MemberRole = roleRepository?.GetById((int)MemberRoleEnum.Admin)
                 };
-                var adminProfile = new UserProfile();
-                adminProfile.User = admin;
+                var adminProfile = new UserProfile
+                {
+                    NickName = MemberRoleEnum.Admin.ToString(),
+                    FirstName = "Admin",
+                    LastName = "Admin",
+                    User = admin,
+                };
                 userProfileRepository.Add(adminProfile);
 
                 var manager = new User
@@ -76,8 +85,13 @@ namespace ServiceCompany.DbStuff
                     PreferLocalLang = "en",
                     MemberRole = roleRepository?.GetById((int)MemberRoleEnum.Manager)
                 };
-                var managerProfile = new UserProfile();
-                managerProfile.User = manager;
+                var managerProfile = new UserProfile
+                {
+                    NickName = MemberRoleEnum.Manager.ToString(),
+                    FirstName = "Manager",
+                    LastName = "Manager",
+                    User = manager,
+                };
                 userProfileRepository.Add(managerProfile);
 
                 var user = new User
@@ -88,9 +102,58 @@ namespace ServiceCompany.DbStuff
                     PreferLocalLang = "en",
                     MemberRole = roleRepository?.GetById((int)MemberRoleEnum.User)
                 };
-                var userProfile = new UserProfile();
-                userProfile.User = user;
+                var userProfile = new UserProfile
+                {
+                    NickName = MemberRoleEnum.User.ToString(),
+                    FirstName = "User",
+                    LastName = "User",
+                    User = user,
+                };
                 userProfileRepository.Add(userProfile);
+            }
+        }
+
+        private static void SeedCompany(IServiceProvider di)
+        {
+            var userRepository = di.GetService<UserRepository>();
+            var companyRepository = di.GetService<CompanyRepository>();
+
+            if (companyRepository.Any() == false)
+            {
+                var testCompanyProfile = new CompanyProfile()
+                {
+                    Email = "TestCompany@email.com",
+                    Address = "TestCompanyAddress",
+                    PhoneNumber = "TestCompanyPhoneNumber",
+                };
+                var testCompany = new Company
+                {
+                    Name = "TestCompany",
+                    ShortName = "TestC1",
+                    Profile = testCompanyProfile,
+                    Author = userRepository.GetSuperAdmin()
+                };
+                companyRepository.Add(testCompany);
+            }
+        }
+
+        private static void SeedProject(IServiceProvider di)
+        {
+            var userRepository = di.GetService<UserRepository>();
+            var companyRepository = di.GetService<CompanyRepository>();
+            var projectRepository = di.GetService<ProjectRepository>();
+
+            if (projectRepository.Any() == false)
+            {
+                var testProject = new Project
+                {
+                    Name = "TestProject",
+                    ShortName = "TestP1",
+                    Address = "TestProjectAddress",
+                    Company = companyRepository.GetTestCompany(),
+                    Author = userRepository.GetSuperAdmin()
+                };
+                projectRepository.Add(testProject);
             }
         }
     }

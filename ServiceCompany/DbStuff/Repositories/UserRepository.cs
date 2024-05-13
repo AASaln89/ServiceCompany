@@ -53,6 +53,14 @@ namespace ServiceCompany.DbStuff.Repositories
                 .FirstOrDefault(x => x.Id == id);
         }
 
+        public User GetSuperAdmin()
+        {
+            return _entities
+                .Include(x => x.MemberRole)
+                .Where(x => x.MemberRole.Id == (int)MemberRoleEnum.SuperAdmin)
+                .FirstOrDefault();
+        }
+
         public IEnumerable<User> GetExecutors()
         {
             return _entities
