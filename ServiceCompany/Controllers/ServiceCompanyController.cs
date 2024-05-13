@@ -312,7 +312,7 @@ namespace ServiceCompany.Controllers
                     CompanyEmail = dbCompany?.Profile?.Email,
                     CompanyPhoneNumber = dbCompany?.Profile?.PhoneNumber,
                     CompanyStatus = dbCompany.IsActive.ToString(),
-                    CurrentUserName = dbCompany.Author.Profile.FirstName + " " + dbCompany.Author.Profile.LastName
+                    CurrentUserName = dbCompany?.Author?.Profile?.FirstName + " " + dbCompany?.Author?.Profile?.LastName
                 })
                 .ToList();
 
@@ -324,7 +324,7 @@ namespace ServiceCompany.Controllers
                     ProjectShortName = dbProject.ShortName,
                     ProjectAdress = dbProject.Address,
                     ProjectStatus = dbProject.IsActive.ToString(),
-                    CurrentUserName = dbProject.Author.Profile.FirstName + " " + dbProject.Author.Profile.LastName,
+                    CurrentUserName = dbProject?.Author?.Profile?.FirstName + " " + dbProject?.Author?.Profile?.LastName,
                     ProjectLinkCompany = dbProject.Company.Name
                 })
                 .ToList();
