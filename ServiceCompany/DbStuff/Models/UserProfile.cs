@@ -16,5 +16,7 @@ namespace ServiceCompany.DbStuff.Models
         public byte[]? Avatar { get; set; }
 
         public virtual User? User { get; set; }
+
+        public UserProfile() : base() { }
     }
 }

@@ -403,6 +403,15 @@ namespace ServiceCompany.Localisations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test Api page.
+        /// </summary>
+        public static string TestApi {
+            get {
+                return ResourceManager.GetString("TestApi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MongoDB.
         /// </summary>
         public static string TestMongo {

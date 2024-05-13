@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using ServiceCompany.ApiServices;
+using System.Data.Common;
 
 namespace ServiceCompany.Controllers
 {
@@ -305,11 +306,13 @@ namespace ServiceCompany.Controllers
                 {
                     Id = dbCompany.Id,
                     CompanyName = dbCompany.Name,
+                    CreationDate = dbCompany.CreationDate,
                     CompanyShortName = dbCompany.ShortName,
                     CompanyAdress = dbCompany?.Profile?.Address,
                     CompanyEmail = dbCompany?.Profile?.Email,
                     CompanyPhoneNumber = dbCompany?.Profile?.PhoneNumber,
                     CompanyStatus = dbCompany.IsActive.ToString(),
+                    CurrentUserName = dbCompany.Author.Profile.FirstName + " " + dbCompany.Author.Profile.LastName
                 })
                 .ToList();
 
@@ -321,6 +324,7 @@ namespace ServiceCompany.Controllers
                     ProjectShortName = dbProject.ShortName,
                     ProjectAdress = dbProject.Address,
                     ProjectStatus = dbProject.IsActive.ToString(),
+                    CurrentUserName = dbProject.Author.Profile.FirstName + " " + dbProject.Author.Profile.LastName,
                     ProjectLinkCompany = dbProject.Company.Name
                 })
                 .ToList();
@@ -411,36 +415,29 @@ namespace ServiceCompany.Controllers
         [AdminOnly]
         public IActionResult AddCompany()
         {
-            return View();
+            var viewModel = new CompanyViewModel();
+            CheckUser(viewModel);
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [AdminOnly]
-        public IActionResult AddCompany(CompanyViewModel companyViewModel)
+        public IActionResult AddCompany(CompanyViewModel viewModel)
         {
-            companyViewModel.Companies = _companyRepository.GetAll()
-                .Select(x => new SelectListItem(x.Name, x.Id.ToString()))
-                .ToList();
-
-            companyViewModel.Projects = _projectRepository.GetAll()
-                .Select(x => new SelectListItem(x.Name, x.Id.ToString()))
-                .ToList();
-
-            companyViewModel.Permissions = _memberRoleRepository.GetAll()
-                .Select(x => new SelectListItem(x.Role, x.Id.ToString()))
-                .ToList();
+            CheckUser(viewModel);
 
             var company = new Company
             {
-                Name = companyViewModel.CompanyName,
-                ShortName = companyViewModel.CompanyShortName,
-
+                Name = viewModel.CompanyName,
+                ShortName = viewModel.CompanyShortName,
+                Author  = _authService.GetCurrentUser()
             };
             var companyProfile = new CompanyProfile
             {
-                Email = companyViewModel.CompanyEmail,
-                Address = companyViewModel.CompanyAdress,
-                PhoneNumber = companyViewModel.CompanyPhoneNumber,
+                Email = viewModel.CompanyEmail,
+                Address = viewModel.CompanyAdress,
+                PhoneNumber = viewModel.CompanyPhoneNumber,
             };
             company.Profile = companyProfile;
             _companyRepository.Add(company);
@@ -466,6 +463,8 @@ namespace ServiceCompany.Controllers
                 viewModel.CompanyEmail = company?.Profile?.Email;
                 viewModel.CompanyPhoneNumber = company?.Profile?.PhoneNumber;
                 viewModel.CompanyStatus = company.IsActive.ToString();
+
+                CheckUser(viewModel);
 
                 return View(viewModel);
             }

@@ -15,9 +15,15 @@ namespace ServiceCompany.DbStuff.Models
 
         public virtual Company? Company { get; set; }
 
+        public virtual User? Author { get; set; }
+
         public virtual UserProfile? Profile { get; set; }
 
         public virtual List<Project>? Projects { get; set; }
+
+        public virtual List<Project>? CreatedProjects { get; set; }
+
+        public virtual List<Company>? CreatedCompanies { get; set; }
 
         public virtual MemberRole? MemberRole { get; set; }
 

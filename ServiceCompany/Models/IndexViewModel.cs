@@ -1,4 +1,4 @@
-﻿using ServiceCompany.ApiServices;
+﻿using ServiceCompany.Models.TestApiModels;
 
 namespace ServiceCompany.Models
 {

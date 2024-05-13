@@ -152,6 +152,12 @@ namespace ServiceCompany.DbStuff
 
             builder
                 .Entity<Project>()
+                .HasOne(p => p.Author)
+                .WithMany(c => c.CreatedProjects)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .Entity<Project>()
                 .HasMany(p => p.Users)
                 .WithMany(c => c.Projects);
             #endregion
