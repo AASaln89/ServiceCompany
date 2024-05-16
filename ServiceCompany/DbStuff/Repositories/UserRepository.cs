@@ -85,8 +85,11 @@ namespace ServiceCompany.DbStuff.Repositories
         {
             if (email is not null & password is not null)
             {
-                var user = _context.Users.Include(x => x.MemberRole)
-                .SingleOrDefault(x => x.Email.ToLower() == email.ToLower() && x.Password == password);
+                var user = _context.Users
+                    .Include(x => x.MemberRole)
+                    .Include(x=>x.Profile)
+                    .Where(x=>x.IsActive)
+                    .SingleOrDefault(x => x.Email.ToLower() == email.ToLower() && x.Password == password);
 
                 return user;
             }

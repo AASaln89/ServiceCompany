@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using ServiceCompany.Middlewares;
 using ServiceCompany.ApiServices;
 using ServiceCompany.Models;
+using ServiceCompany.DbStuff.Postgres;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,8 +38,10 @@ builder.Services.AddHostedService<AlertMaintenance>();
 builder.Services.AddControllersWithViews();
 
 var connStringManagementCompany = builder.Configuration.GetConnectionString("ServiceCompany");
+var connStringManagementCompanyPostgres = builder.Configuration.GetConnectionString("ServiceCompanyPostgres");
 
 builder.Services.AddDbContext<ServiceCompanyDbContext>(x => x.UseSqlServer(connStringManagementCompany));
+builder.Services.AddDbContext<ServiceCompanyPostgresDbContext>(x => x.UseNpgsql(connStringManagementCompanyPostgres));
 
 builder.Services.AddSignalR();
 

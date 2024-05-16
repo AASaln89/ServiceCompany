@@ -75,19 +75,17 @@ namespace ServiceCompany.Controllers
             
             if (user == null)
             {
-                //ModelState.AddModelError(nameof(LoginViewModel.Email), "Wrong name or password");
-                //return View(loginViewModel);
                 return RedirectToAction("LogError", "Auth");
             }
 
             var claims = new List<Claim>
             {
-                new Claim("id", user.Id.ToString()),
-                new Claim("permissionId", user.MemberRole?.Id.ToString() ?? ""),
-                new Claim("permissionName", user.MemberRole?.Role ?? ""),
+                new Claim(AuthService.ID, user.Id.ToString()),
+                new Claim(AuthService.ROLE_ID, user.MemberRole?.Id.ToString() ?? ""),
+                new Claim(AuthService.ROLE, user.MemberRole?.Role ?? ""),
                 new Claim(AuthService.LOCAL_LANG_TYPE, user.PreferLocalLang),
-                new Claim("Name", user.Name ?? ""),
-                new Claim("email", user.Email ?? ""),
+                new Claim(AuthService.NAME, user.Profile?.NickName ?? ""),
+                new Claim(AuthService.EMAIL, user.Email ?? ""),
             };
 
             var identity = new ClaimsIdentity(claims, AUTH_KEY);
