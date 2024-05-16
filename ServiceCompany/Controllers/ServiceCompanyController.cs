@@ -1,16 +1,14 @@
-﻿using ServiceCompany.BusinessServices;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using ServiceCompany.ApiServices;
+using ServiceCompany.BusinessServices;
 using ServiceCompany.Controllers.CustomAuthAttributes;
 using ServiceCompany.DbStuff.Models;
 using ServiceCompany.DbStuff.Models.Enums;
 using ServiceCompany.DbStuff.Repositories;
 using ServiceCompany.Models;
 using ServiceCompany.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Diagnostics;
-using ServiceCompany.ApiServices;
-using System.Data.Common;
 
 namespace ServiceCompany.Controllers
 {
@@ -642,10 +640,10 @@ namespace ServiceCompany.Controllers
         }
 
         [HttpPost]
-        [AdminOnly]
         public IActionResult RemoveUser(int id)
         {
-            _userRepository.Delete(id);
+            var user = _userRepository.GetById(id);
+            user.IsActive = false;
 
             return RedirectToAction("Index");
         }

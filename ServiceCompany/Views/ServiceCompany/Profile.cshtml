@@ -44,6 +44,11 @@
             @Html.ValidationMessageFor(x => x.Password)
 
             <input type="submit" value="@ServiceCompany.ChangeButton" />
+            
+        </form>
+        <form action="/ServiceCompany/RemoveUser" class="remove-form" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit">@ServiceCompany.Delete @ServiceCompany.Profile</button>
         </form>
         <div class="task-table short-table">
             <div class="short-table"> @ServiceCompany.MyTasks</div>

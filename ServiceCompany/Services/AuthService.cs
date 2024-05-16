@@ -9,6 +9,11 @@ namespace ServiceCompany.Services
         private UserRepository _userRepository;
         private IHttpContextAccessor _httpContextAccessor;
         public const string LOCAL_LANG_TYPE = "localLanguage";
+        public const string ROLE = "roleName";
+        public const string ROLE_ID = "roleId";
+        public const string NAME = "name";
+        public const string EMAIL = "email";
+        public const string ID = "id";
 
         public AuthService(IHttpContextAccessor httpContextAccessor,
             UserRepository userRepository)
@@ -33,7 +38,7 @@ namespace ServiceCompany.Services
         public int? GetCurrentUserId()
         {
             // HttpContext != null
-            var idStr = _httpContextAccessor?.HttpContext?.User.Claims?.FirstOrDefault(x => x.Type == "id")?.Value;
+            var idStr = _httpContextAccessor?.HttpContext?.User.Claims?.FirstOrDefault(x => x.Type == ID)?.Value;
 
             if (idStr == null)
             {
@@ -46,12 +51,12 @@ namespace ServiceCompany.Services
 
         public string GetCurrentPermissionName()
         {
-            return _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "permissionName")?.Value ?? "Гость";
+            return _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ROLE)?.Value ?? "Гость";
         }
 
         public string GetCurrentUserNickName()
         {
-            return _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "nickName")?.Value ?? "Гость";
+            return _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == NAME)?.Value ?? "Гость";
         }
 
         public bool IsSuperAdmin()
@@ -94,7 +99,7 @@ namespace ServiceCompany.Services
 
         public User GetCurrentMcUser()
         {
-            var idStr = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "id").Value;
+            var idStr = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ID).Value;
             var id = int.Parse(idStr);
             return _userRepository.GetById(id);
         }
