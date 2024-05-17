@@ -15,8 +15,8 @@ namespace ServiceCompany.DbStuff.Repositories.MongoRepositories
 
         public TextFileRepository()
         {
-            _mongoClient = new MongoClient("");
-            _mongoDb = _mongoClient.GetDatabase("");
+            _mongoClient = new MongoClient("localhost:");
+            _mongoDb = _mongoClient.GetDatabase("FileDb");
             _gridFS = new GridFSBucket(_mongoDb);
         }
 

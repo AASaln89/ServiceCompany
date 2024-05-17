@@ -12,8 +12,8 @@ namespace ServiceCompany.DbStuff.Repositories.MongoRepositories
 
         public FileJpgRepository()
         {
-            _mongoClient = new MongoClient("");
-            _mongoDb = _mongoClient.GetDatabase("");
+            _mongoClient = new MongoClient("localhost:");
+            _mongoDb = _mongoClient.GetDatabase("FileDb");
             _mongoDbTable = _mongoDb.GetCollection<FileJpg>("ImageJpg");
         }
 
